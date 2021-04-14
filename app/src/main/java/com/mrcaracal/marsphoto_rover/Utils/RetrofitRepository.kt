@@ -6,4 +6,5 @@ class RetrofitRepository {
     suspend fun getData() = retrofitClient.getMarsData()
     suspend fun getDataOpportunity() = retrofitClient.getMarsDataOpportunity()
     suspend fun getDataSpirit() = retrofitClient.getMarsDataSpirit()
+
 }

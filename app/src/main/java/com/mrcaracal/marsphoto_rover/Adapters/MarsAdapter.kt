@@ -5,12 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mrcaracal.marsphoto_rover.Interface.RecyclerviewClickInterface
 import com.mrcaracal.marsphoto_rover.Models.Photo
 import com.mrcaracal.marsphoto_rover.R
 import kotlinx.android.synthetic.main.item_row_photo_and_details.view.*
 
-class MarsAdapter(private val photos: List<Photo>) :
+class MarsAdapter(
+    private val photos: List<Photo>,
+    recyclerviewClickInterface: RecyclerviewClickInterface ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var click = recyclerviewClickInterface
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context)
@@ -27,11 +32,20 @@ class MarsAdapter(private val photos: List<Photo>) :
         when (holder) {
             is PhotoHolder -> {
                 holder.bind(photos[position])
+
+                holder.itemCLickCard.setOnClickListener {
+                    //click.openWindow(photos[position].earth_date, photos[position].img_src)
+                    click.openWindow(photos[position])
+                }
+
             }
         }
     }
 
     class PhotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        var itemCLickCard = itemView.item_cardView
+
         fun bind(photo: Photo) {
 
             val image = "${photo.img_src}".replace("http", "https")

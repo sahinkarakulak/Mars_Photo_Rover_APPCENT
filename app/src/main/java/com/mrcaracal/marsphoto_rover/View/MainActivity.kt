@@ -2,6 +2,7 @@ package com.mrcaracal.marsphoto_rover.View
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,11 +15,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.mrcaracal.marsphoto_rover.Adapters.MarsAdapter
+import com.mrcaracal.marsphoto_rover.Interface.RecyclerviewClickInterface
+import com.mrcaracal.marsphoto_rover.Models.Photo
 import com.mrcaracal.marsphoto_rover.R
 import com.mrcaracal.marsphoto_rover.ViewModel.MarsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+private const val TAG = "MainActivity"
+
+class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
 
     private var aracIsmi = "curiosity"
     private lateinit var marsViewModel: MarsViewModel
@@ -77,19 +82,19 @@ class MainActivity : AppCompatActivity() {
 
         if (kosul.equals("curiosity")) {
             marsViewModel.data.observe(this, Observer { data ->
-                marsAdapter = MarsAdapter(photos = data.photos)
+                marsAdapter = MarsAdapter(photos = data.photos, this)
                 recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
                 recyclerView.adapter = marsAdapter
             })
         } else if (kosul.equals("opportunity")) {
             marsViewModel.data2.observe(this, Observer { data ->
-                marsAdapter = MarsAdapter(photos = data.photos)
+                marsAdapter = MarsAdapter(photos = data.photos, this)
                 recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
                 recyclerView.adapter = marsAdapter
             })
         } else if (kosul.equals("spirit")) {
             marsViewModel.data3.observe(this, Observer { data ->
-                marsAdapter = MarsAdapter(photos = data.photos)
+                marsAdapter = MarsAdapter(photos = data.photos, this)
                 recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
                 recyclerView.adapter = marsAdapter
             })
@@ -146,4 +151,16 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun openWindow(photoClick: Photo) {
+        Log.i(TAG, "openWindow: \n"+photoClick.camera.name+"\n"+photoClick.earth_date+"\n"+photoClick.img_src)
+
+    }
+
+    // Tek tek parametre göndermek yerine üstteki gibi modeli pozisyona göre gönder
+    /*
+    override fun openWindow(time: String, link: String) {
+        Toast.makeText(this, ""+time+"\n\n"+link, Toast.LENGTH_SHORT).show()
+    }
+    */
 }
