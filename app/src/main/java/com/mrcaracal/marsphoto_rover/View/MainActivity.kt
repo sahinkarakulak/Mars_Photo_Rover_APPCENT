@@ -157,10 +157,5 @@ class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
 
     }
 
-    // Tek tek parametre göndermek yerine üstteki gibi modeli pozisyona göre gönder
-    /*
-    override fun openWindow(time: String, link: String) {
-        Toast.makeText(this, ""+time+"\n\n"+link, Toast.LENGTH_SHORT).show()
-    }
-    */
+    //
 }
