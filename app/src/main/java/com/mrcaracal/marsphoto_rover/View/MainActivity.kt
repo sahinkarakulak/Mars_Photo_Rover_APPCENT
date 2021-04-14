@@ -3,16 +3,19 @@ package com.mrcaracal.marsphoto_rover.View
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
+import android.widget.ImageView
+import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.mrcaracal.marsphoto_rover.Adapters.MarsAdapter
 import com.mrcaracal.marsphoto_rover.Interface.RecyclerviewClickInterface
@@ -153,9 +156,43 @@ class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
     }
 
     override fun openWindow(photoClick: Photo) {
-        Log.i(TAG, "openWindow: \n"+photoClick.camera.name+"\n"+photoClick.earth_date+"\n"+photoClick.img_src)
+
+        val window = PopupWindow(this)
+        val view = layoutInflater.inflate(R.layout.layout_popup, null)
+        window.contentView = view
+        window.showAtLocation(
+            tabs,
+            Gravity.CENTER,
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+
+        val cardMars = view.findViewById<CardView>(R.id.popup_card)
+        cardMars.setOnClickListener {
+            window.dismiss()
+        }
+
+        var pictureMars = view.findViewById<ImageView>(R.id.popup_resim)
+        var cekildigiTarihMars = view.findViewById<TextView>(R.id.popup_cekildigi_tarih)
+        var aracAdiMars = view.findViewById<TextView>(R.id.popup_arac_adi)
+        var kameraAdiMars = view.findViewById<TextView>(R.id.popup_kamera_adi)
+        var gorevDurumuMars = view.findViewById<TextView>(R.id.popup_gorev_durumu)
+        var firlatmaMars = view.findViewById<TextView>(R.id.popup_firlatma_tarihi)
+        var inisMars = view.findViewById<TextView>(R.id.popup_inis_tarihi)
+
+        val image = "${photoClick.img_src}".replace("http", "https")
+        Glide.with(this).load(image).into(pictureMars)
+        cekildigiTarihMars.text = photoClick.earth_date
+        aracAdiMars.text = photoClick.rover.name
+        kameraAdiMars.text = photoClick.camera.name
+        gorevDurumuMars.text = photoClick.rover.status
+        firlatmaMars.text = photoClick.rover.landing_date
+        inisMars.text = photoClick.rover.launch_date
+
+        Log.i(
+            TAG,
+            "openWindow: " + pictureMars + "\n" + cekildigiTarihMars + "\n" + aracAdiMars + "\n" + kameraAdiMars + "\n" + firlatmaMars + "\n" + inisMars
+        )
 
     }
-
-    //
 }

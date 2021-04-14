@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.item_row_photo_and_details.view.*
 
 class MarsAdapter(
     private val photos: List<Photo>,
-    recyclerviewClickInterface: RecyclerviewClickInterface ) :
+    recyclerviewClickInterface: RecyclerviewClickInterface
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var click = recyclerviewClickInterface
