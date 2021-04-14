@@ -182,12 +182,12 @@ class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
 
         val image = "${photoClick.img_src}".replace("http", "https")
         Glide.with(this).load(image).into(pictureMars)
-        cekildigiTarihMars.text = photoClick.earth_date
-        aracAdiMars.text = photoClick.rover.name
-        kameraAdiMars.text = photoClick.camera.name
-        gorevDurumuMars.text = photoClick.rover.status
-        firlatmaMars.text = photoClick.rover.landing_date
-        inisMars.text = photoClick.rover.launch_date
+        cekildigiTarihMars.text = "Date: "+photoClick.earth_date
+        aracAdiMars.text = "Rover Name: "+photoClick.rover.name
+        kameraAdiMars.text = "Camera Name: "+photoClick.camera.name
+        gorevDurumuMars.text = "Status: "+photoClick.rover.status
+        firlatmaMars.text = "Launch Date: "+photoClick.rover.launch_date
+        inisMars.text = "Landing Date: "+photoClick.rover.landing_date
 
         Log.i(
             TAG,
