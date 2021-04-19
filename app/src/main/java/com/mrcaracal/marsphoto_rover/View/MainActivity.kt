@@ -1,7 +1,10 @@
 package com.mrcaracal.marsphoto_rover.View
 
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -167,10 +170,12 @@ class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
 
+
         val cardMars = view.findViewById<CardView>(R.id.popup_card)
         cardMars.setOnClickListener {
             window.dismiss()
         }
+
 
         var pictureMars = view.findViewById<ImageView>(R.id.popup_resim)
         var cekildigiTarihMars = view.findViewById<TextView>(R.id.popup_cekildigi_tarih)
@@ -191,7 +196,8 @@ class MainActivity : AppCompatActivity(), RecyclerviewClickInterface {
 
         Log.i(
             TAG,
-            "openWindow: " + pictureMars + "\n" + cekildigiTarihMars + "\n" + aracAdiMars + "\n" + kameraAdiMars + "\n" + firlatmaMars + "\n" + inisMars
+            "openWindow: " + pictureMars + "\n" + cekildigiTarihMars + "\n" + aracAdiMars +
+                    "\n" + kameraAdiMars + "\n" + firlatmaMars + "\n" + inisMars
         )
 
     }

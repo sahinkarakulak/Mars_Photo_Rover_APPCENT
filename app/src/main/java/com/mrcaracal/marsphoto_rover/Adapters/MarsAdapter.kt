@@ -35,7 +35,6 @@ class MarsAdapter(
                 holder.bind(photos[position])
 
                 holder.itemCLickCard.setOnClickListener {
-                    //click.openWindow(photos[position].earth_date, photos[position].img_src)
                     click.openWindow(photos[position])
                 }
 
